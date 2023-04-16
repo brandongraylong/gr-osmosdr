@@ -233,7 +233,12 @@ bool spyserver_source_c::set_setting(uint32_t settingType, std::vector<uint32_t>
       argBytes[i] = settingBytes[i];
     }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstringop-overflow"
+#pragma GCC diagnostic ignored "-Warray-bounds"
+#pragma GCC diagnostic ignored "-Wrestrict"
     std::memcpy(&argBytes[0]+sizeof(uint32_t), &params[0], sizeof(uint32_t) * params.size());
+#pragma GCC diagnostic pop
   } else {
     argBytes = std::vector<uint8_t>();
   }
