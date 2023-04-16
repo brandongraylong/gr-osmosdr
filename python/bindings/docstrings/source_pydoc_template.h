@@ -15,7 +15,7 @@
  */
 
 
- 
+
  static const char *__doc_osmosdr_source = R"doc()doc";
 
 
@@ -159,4 +159,8 @@
 
  static const char *__doc_osmosdr_source_set_time_unknown_pps = R"doc()doc";
 
-  
+
+ static const char *__doc_osmosdr_source_set_biast = R"doc()doc";
+
+
+ static const char *__doc_osmosdr_source_get_biast = R"doc()doc";

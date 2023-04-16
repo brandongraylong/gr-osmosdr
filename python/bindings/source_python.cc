@@ -40,7 +40,7 @@ void bind_source(py::module& m)
            py::arg("args") = "",
            D(source,make)
         )
-        
+
 
 
 
@@ -327,16 +327,19 @@ void bind_source(py::module& m)
             D(source,set_time_unknown_pps)
         )
 
+
+        .def("set_biast",&source::set_biast,
+            py::arg("enabled"),
+            D(source,set_biast)
+        )
+
+        .def("get_biast",&source::get_biast,
+            D(source,get_biast)
+        )
+
         ;
 
 
 
 
 }
-
-
-
-
-
-
-
