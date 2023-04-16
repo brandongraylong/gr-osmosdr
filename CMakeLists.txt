@@ -21,8 +21,8 @@
 # Project setup
 ########################################################################
 cmake_minimum_required(VERSION 3.8)
-include(GNUInstallDirs)
 project(gr-osmosdr CXX C)
+include(GNUInstallDirs)
 enable_testing()
 
 #policy setup
@@ -41,7 +41,8 @@ set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "")
 list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
 # Find GNURadio (pmt and runtime are core, always included)
-find_package(Gnuradio "3.8" REQUIRED COMPONENTS blocks fft filter)
+include(FindPkgConfig)
+find_package(Gnuradio "3.9" REQUIRED COMPONENTS blocks fft filter)
 
 # Set the version information here
 set(VERSION_MAJOR 0)
@@ -114,15 +115,7 @@ SET(BOOST_REQUIRED_COMPONENTS
     system
 )
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    set(CMAKE_CXX_STANDARD 11)
-elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    set(CMAKE_CXX_STANDARD 11)
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    set(CMAKE_CXX_STANDARD 11)
-else()
-    message(WARNING "C++ standard could not be set because compiler is not GNU, Clang or MSVC.")
-endif()
+set(CMAKE_CXX_STANDARD 11)
 
 # Misc options
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR
@@ -223,6 +216,7 @@ message (STATUS " Found Volk: ${Volk_FOUND}")
     ####################
 
 find_package(LibRTLSDR)
+find_package(LibMiriSDR)
 if(ENABLE_NONFREE)
     find_package(LibSDRplay)
 endif(ENABLE_NONFREE)
@@ -230,7 +224,7 @@ find_package(LibHackRF)
 find_package(LibAIRSPY)
 find_package(LibAIRSPYHF)
 find_package(LibbladeRF)
-find_package(GnuradioFCDPP)
+find_package(GnuradioFuncube)
 find_package(SoapySDR NO_MODULE)
 find_package(LibFreeSRP)
 find_package(LibXTRX)
@@ -240,20 +234,11 @@ find_package(Doxygen)
     ##########
 
 find_package(PythonLibs 3)
-find_package(SWIG)
-
-if(SWIG_FOUND)
-    message(STATUS "Minimum SWIG version required is 1.3.31")
-    set(SWIG_VERSION_CHECK FALSE)
-    if("${SWIG_VERSION}" VERSION_GREATER "1.3.30")
-        set(SWIG_VERSION_CHECK TRUE)
-    endif()
-endif(SWIG_FOUND)
+find_package(pybind11)
 
 GR_REGISTER_COMPONENT("Python support" ENABLE_PYTHON
     PYTHONLIBS_FOUND
-    SWIG_FOUND
-    SWIG_VERSION_CHECK
+    pybind11_FOUND
 )
 
 ########################################################################
@@ -321,7 +306,6 @@ add_custom_target(uninstall
 add_subdirectory(include/osmosdr)
 add_subdirectory(lib)
 if(ENABLE_PYTHON)
-    add_subdirectory(swig)
     add_subdirectory(python)
     add_subdirectory(grc)
     add_subdirectory(apps)
