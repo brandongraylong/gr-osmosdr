@@ -249,7 +249,7 @@ source_impl::source_impl( const std::string &args )
       dev_list.push_back( dev );
 #endif
 #ifdef ENABLE_SPYSERVER
-    BOOST_FOREACH( std::string dev, spyserver_source_c::get_devices() )
+    for (std::string dev : spyserver_source_c::get_devices())
       dev_list.push_back( dev );
 #endif
 #ifdef ENABLE_SOAPY
@@ -997,14 +997,14 @@ void source_impl::set_time_unknown_pps(const osmosdr::time_spec_t &time_spec)
 
 
 void source_impl::set_biast( bool enabled ) {
-  BOOST_FOREACH( source_iface *dev, _devs )
+  for (source_iface *dev : _devs)
   {
     dev->set_biast(enabled);
   }
 }
 
 bool source_impl::get_biast() {
-  BOOST_FOREACH( source_iface *dev, _devs )
+  for (source_iface *dev : _devs)
   {
     if (dev->get_biast()) {
       return true;

@@ -207,7 +207,7 @@ devices_t device::find(const device_t &hint)
     devices.push_back( device_t(dev) );
 #endif
 #ifdef ENABLE_SPYSERVER
-  BOOST_FOREACH( std::string dev, spyserver_source_c::get_devices( fake ) )
+  for (std::string dev : spyserver_source_c::get_devices( fake ))
     devices.push_back( device_t(dev) );
 #endif
 #ifdef ENABLE_REDPITAYA
