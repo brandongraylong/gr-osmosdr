@@ -454,7 +454,7 @@ osmosdr::freq_range_t hackrf_source_c::get_bandwidth_range( size_t chan )
 }
 
 void hackrf_source_c::set_biast( bool enabled ) {
-  hackrf_set_antenna_enable(_dev, enabled ? 1 : 0);
+  hackrf_set_antenna_enable( _dev.get(), enabled ? 1 : 0 );
   _biasT = enabled;
 }
 
