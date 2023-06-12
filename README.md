@@ -39,7 +39,7 @@ properly installed. The build system of gr-osmosdr will recognize them and
 enable specific source/sink components thereafter.
 
 Please note: prior pulling a new version from git and compiling it,
-please do a "make uninstall" first to properly remove the previous version.
+please do a `make uninstall` first to properly remove the previous version.
 
 ## Building
 
@@ -51,14 +51,14 @@ Run `./install_ubuntu_2204.sh`
 
 Building with cmake:
 
-git clone git://git.osmocom.org/gr-osmosdr
-cd gr-osmosdr/
-mkdir build
-cd build/
-cmake ../
-make
-sudo make install
-sudo ldconfig
+    * `git clone git://git.osmocom.org/gr-osmosdr`
+    * `cd gr-osmosdr/`
+    * `mkdir build`
+    * `cd build/`
+    * `cmake ../`
+    * `make`
+    * `sudo make install`
+    * `sudo ldconfig`
 
 ## Notes
 
