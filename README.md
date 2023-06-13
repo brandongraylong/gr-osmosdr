@@ -41,7 +41,7 @@ enable specific source/sink components thereafter.
 Please note: prior pulling a new version from git and compiling it,
 please do a `make uninstall` first to properly remove the previous version.
 
-## Building
+## Building & Installing
 
 ### Ubuntu 22.04
 
