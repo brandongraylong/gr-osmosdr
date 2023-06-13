@@ -13,6 +13,6 @@ else
 fi
 
 cmake ..
-make
+make -j12
 sudo make install
 sudo ldconfig
